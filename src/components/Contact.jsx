@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { company, contact } from "../data/site";
@@ -9,14 +9,9 @@ const empty = { name: "", email: "", company: "", country: "", volume: "", messa
 const field =
   "w-full rounded-lg border border-line bg-paper px-4 py-3 text-[15px] text-ink placeholder:text-muted/70 transition focus:border-accent focus:bg-card focus:outline-none focus:ring-2 focus:ring-accent/20";
 
-const Contact = ({ draft }) => {
+const Contact = () => {
   const [form, setForm] = useState(empty);
   const [status, setStatus] = useState("idle");
-
-  // Prefill the message when a visitor sends an order from the hero box.
-  useEffect(() => {
-    if (draft) setForm((f) => ({ ...f, message: draft }));
-  }, [draft]);
 
   const onChange = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 

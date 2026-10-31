@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import {
@@ -18,14 +17,11 @@ import Footer from "../components/Footer";
 import { FloatingWhatsApp, ScrollToTop } from "../components/FloatingActions";
 
 const LandingPage = () => {
-  // Order text typed into the hero box, handed to the contact form.
-  const [draft, setDraft] = useState("");
-
   return (
     <div className="min-h-screen">
       <Navbar />
       <main>
-        <Hero onDraft={setDraft} />
+        <Hero />
         <Clients />
         <About />
         <Process />
@@ -36,7 +32,7 @@ const LandingPage = () => {
         <Testimonials />
         <Faq />
         <Cta />
-        <Contact draft={draft} />
+        <Contact />
       </main>
       <Footer />
       <FloatingWhatsApp />
