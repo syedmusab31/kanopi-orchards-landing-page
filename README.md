@@ -25,7 +25,7 @@ I was brought in to design and build a new landing page around one goal: **get a
 
 - **Brand-aligned visual direction.** Editorial serif headlines with italic emphasis, monospace UI labels, hairline borders and a pixel-art landscape hero, so an agricultural business reads as modern and precise.
 - **Rewritten copy end to end.** Every section answers a question a procurement team actually asks: consistency, compliance, transit times, pricing model, minimum order.
-- **Conversion-first hero.** Buyers type their order ("3 reefers, size 18–22, Rotterdam, week 12") straight into the hero box. Pressing send takes them to the contact form with the message already filled in.
+- **Proof-first hero.** A live reefer-tracking card (route progress, temperature, humidity, carton count) and quality stats float over the landscape, so buyers see the product experience before reading a word of sales copy.
 - **Content in one file.** All copy, stats, team, markets, gallery and contact details live in `src/data/site.js`, so the Kanopi team can update the site without touching components.
 - **Production details.** Responsive from 360px up, accessible markup (labels, `aria-*`, keyboard-navigable lightbox), reduced-motion support, an automatic current-year footer, image fallbacks and SEO/Open Graph meta.
 
@@ -33,7 +33,7 @@ I was brought in to design and build a new landing page around one goal: **get a
 
 | # | Section | Purpose |
 |---|---------|---------|
-| — | Hero | Value proposition, order prompt, three product entry points |
+| — | Hero | Value proposition, live shipment preview, three product entry points |
 | — | Client strip | Social proof from importers |
 | 01 | About | Company story and key figures |
 | 02 | Process | Nursery → orchard → packhouse → port |
@@ -87,7 +87,7 @@ src/
 │   ├── ui.jsx              # Title, Section, Reveal, Img (with fallback) primitives
 │   ├── Logo.jsx            # Kanopi mark + wordmark
 │   ├── Navbar.jsx
-│   ├── Hero.jsx            # Typing order prompt → prefilled contact form
+│   ├── Hero.jsx            # Live shipment tracker preview
 │   ├── Sections.jsx        # About, Process, Benefits, Markets, Team, Gallery, FAQ…
 │   ├── Contact.jsx
 │   ├── Footer.jsx          # Year is always current

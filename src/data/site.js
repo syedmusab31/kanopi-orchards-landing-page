@@ -45,8 +45,26 @@ export const hero = {
     "Priced per container, not per promise.",
   ],
   image: u("1470071459604-3b5ec3a7fe05", 360),
-  prompt:
-    "Reserve 3 reefers of Hass, size 18–22, landing Rotterdam in week 12.",
+  // Live shipment card shown over the hero landscape (sample data).
+  shipment: {
+    id: "KNP-2418",
+    product: "Hass · Count 18–22 · 4 kg cartons",
+    from: { code: "KNP", name: "Kanopi packhouse" },
+    to: { code: "RTM", name: "Rotterdam" },
+    progress: 0.62,
+    eta: "ETA 6 days",
+    stats: [
+      { label: "Temp", value: "5.5 °C" },
+      { label: "Humidity", value: "92%" },
+      { label: "Cartons", value: "4,620" },
+    ],
+    stages: ["Packed", "Loaded", "At sea", "Arrived"],
+    stage: 2,
+  },
+  chips: [
+    { label: "Dry matter", value: "24.1%" },
+    { label: "Arrival rejection", value: "< 1%" },
+  ],
   cards: [
     {
       label: "Fresh Hass",
