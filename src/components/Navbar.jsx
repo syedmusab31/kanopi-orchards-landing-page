@@ -1,132 +1,85 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-scroll";
-import Icons from "./Icons";
-import { motion, AnimatePresence } from "framer-motion";
-import logo from "../assets/logo.png";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import Logo from "./Logo";
+import { ArrowUpRight } from "./ui";
+import { nav } from "../data/site";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const linkClass =
-    "cursor-pointer hover:text-green-600 px-3 py-2 text-sm font-medium transition-colors";
-
   return (
-    <nav
-      className={`fixed w-full top-0 z-50 transition-all duration-300 ${
-        scrolled ? "glass-effect shadow-lg" : "bg-transparent"
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        scrolled ? "border-b border-line bg-paper/85 backdrop-blur-md" : "border-b border-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center space-x-2">
-            <Link
-              to="hero"
-              smooth={true}
-              duration={500}
-              offset={-70}
-              className="cursor-pointer"
-            >
-              <img
-                src={logo}
-                alt="Happy Liberia Cooperative"
-                className="h-30 w-30 rounded object-contain"
-              />
-            </Link>
-          </div>
+      <div className="mx-auto flex h-16 max-w-[1180px] items-center justify-between px-4 sm:px-6">
+        <Logo />
 
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              <Link to="about" smooth={true} duration={500} offset={-70} className={linkClass}>
-                About
-              </Link>
-              <Link to="plantation" smooth={true} duration={500} offset={-70} className={linkClass}>
-                Our Plantation
-              </Link>
-              <Link to="partnership" smooth={true} duration={500} offset={-70} className={linkClass}>
-                Partnership
-              </Link>
-              <Link
-                to="contact"
-                smooth={true}
-                duration={500}
-                offset={-70}
-                className="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-md text-sm font-medium cursor-pointer"
-              >
-                Partner With Us
-              </Link>
-            </div>
-          </div>
+        <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
+          {nav.map((item) => (
+            <a key={item.href} href={item.href} className="mono-label text-ink/80 transition-colors hover:text-ink">
+              {item.label}
+            </a>
+          ))}
+          <a href="#faq" className="mono-label inline-flex items-center gap-1 text-ink/80 hover:text-ink">
+            FAQ <ArrowUpRight />
+          </a>
+        </nav>
 
-          <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-gray-700 hover:text-gray-900">
-              {isOpen ? <Icons.Close /> : <Icons.Menu />}
-            </button>
-          </div>
+        <div className="hidden items-center gap-3 lg:flex">
+          <a href="#contact" className="btn-ghost">Contact</a>
+          <a href="#contact" className="btn-primary">Get a quote</a>
         </div>
+
+        <button
+          className="rounded-md p-2 text-ink lg:hidden"
+          onClick={() => setOpen((v) => !v)}
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+        >
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </div>
 
       <AnimatePresence>
-        {isOpen && (
-          <motion.div
+        {open && (
+          <motion.nav
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="md:hidden glass-effect relative z-40 shadow-md"
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden border-t border-line bg-paper lg:hidden"
+            aria-label="Mobile"
           >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <Link
-                to="about"
-                smooth={true}
-                duration={500}
-                offset={-70}
-                onClick={() => setIsOpen(false)}
-                className="block px-3 py-2 text-base font-medium hover:text-green-600 cursor-pointer"
-              >
-                About
-              </Link>
-              <Link
-                to="plantation"
-                smooth={true}
-                duration={500}
-                offset={-70}
-                onClick={() => setIsOpen(false)}
-                className="block px-3 py-2 text-base font-medium hover:text-green-600 cursor-pointer"
-              >
-                Our Plantation
-              </Link>
-              <Link
-                to="partnership"
-                smooth={true}
-                duration={500}
-                offset={-70}
-                onClick={() => setIsOpen(false)}
-                className="block px-3 py-2 text-base font-medium hover:text-green-600 cursor-pointer"
-              >
-                Partnership
-              </Link>
-              <Link
-                to="contact"
-                smooth={true}
-                duration={500}
-                offset={-70}
-                onClick={() => setIsOpen(false)}
-                className="block px-3 py-2 text-base font-medium bg-green-700 text-white rounded-md cursor-pointer"
-              >
-                Partner With Us
-              </Link>
+            <div className="flex flex-col gap-1 px-4 py-4">
+              {[...nav, { label: "FAQ", href: "#faq" }].map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="mono-label rounded-md px-2 py-3 text-ink/80 hover:bg-card"
+                >
+                  {item.label}
+                </a>
+              ))}
+              <a href="#contact" onClick={() => setOpen(false)} className="btn-primary mt-3">
+                Get a quote
+              </a>
             </div>
-          </motion.div>
+          </motion.nav>
         )}
       </AnimatePresence>
-    </nav>
+    </header>
   );
 };
 
