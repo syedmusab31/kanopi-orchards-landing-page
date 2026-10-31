@@ -1,7 +1,7 @@
 {
-  "name": "happy-liberia-cooperative",
+  "name": "kanopi-orchards-landing",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,13 +12,11 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@tailwindcss/vite": "^4.1.13",
-    "emailjs-com": "^3.2.0",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.544.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.1",
-    "react-scroll": "^1.9.3",
     "tailwindcss": "^4.1.13"
   },
   "devDependencies": {
